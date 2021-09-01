@@ -1,32 +1,40 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 require("dotenv").config();
 const express = require("express");
+
 const socket = require("socket.io");
 const http = require("http");
+
 const cors = require("cors");
-const morgan = require("morgan");
+const app = express();
+
+const httpServer = http.createServer(app);
+const logger = require("morgan");
+const jwt = require("jsonwebtoken");
 const moment = require("moment");
 moment.locale("id");
-const app = express();
-const httpServer = http.createServer(app);
 const route = require("./src/route/index");
-const jwt = require("jsonwebtoken");
-
-const createError = require("http-errors");
 const { insertMessage } = require("./src/models/messages");
 const port = process.env.DB_PORT;
-// use middle
-app.use(cors());
-app.use(morgan("dev"));
+const createError = require("http-errors");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(logger("dev"));
+// app.use((_, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE"); // If needed
+//   res.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization"); // If needed
+//   res.header("Access-Control-Allow-Credentials", true); // If needed
+//   next();
+// });
 
-app.get("/", (req, res) => {
-  res.json({ message: "success" });
-});
+app.use(cors());
 
 app.use("", route);
 app.use("/file", express.static("./uploads"));
-// config socket
+
 const io = socket(httpServer, {
   cors: {
     origin: "*",
@@ -58,23 +66,17 @@ io.use((socket, next) => {
   });
 });
 
-// use socket
 io.on("connection", (socket) => {
-  console.log("ada", socket.userId);
+  console.log("izin join", socket.userId);
   socket.on("send-message", ({ receiver_id, message_body }, callback) => {
     const dataMessage = {
       sender_id: socket.userId,
       receiver_id: receiver_id,
-      message_body: message_body,
+      message: message_body,
       created_at: new Date(),
     };
-    callback({
-      ...dataMessage,
-      created_at: moment(dataMessage.created_at).format("LT"),
-    });
     insertMessage(dataMessage)
       .then(() => {
-        console.log(receiver_id, socket.userId, "tok");
         socket.broadcast.to(receiver_id).emit("private-message", {
           ...dataMessage,
           created_at: moment(dataMessage.created_at).format("LT"),
@@ -83,6 +85,10 @@ io.on("connection", (socket) => {
       .catch((err) => {
         console.log(err);
       });
+    callback({
+      ...dataMessage,
+      created_at: moment(dataMessage.created_at).format("LT"),
+    });
   });
 
   socket.on("disconnect", () => {
@@ -90,12 +96,15 @@ io.on("connection", (socket) => {
   });
 });
 
+app.listen(port, () => {
+  console.log("server on using port", port);
+});
+
+//  catch error and forward to error handler
+
 app.use("*", (req, res, next) => {
   const error = new createError.NotFound();
   next(error);
-  // res.status(404).json({
-  //   message: 'url not found'
-  // })
 });
 
 app.use((err, req, res, next) => {
@@ -104,6 +113,5 @@ app.use((err, req, res, next) => {
     message: err.message || "internal server Error",
   });
 });
-httpServer.listen(port, () => {
-  console.log("server is runnig port " + port);
-});
+
+module.exports = app;
