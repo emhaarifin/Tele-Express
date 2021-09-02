@@ -1,4 +1,4 @@
-const connection = require("../confiq/db");
+const connection = require('../confiq/db');
 
 module.exports = {
   register: (data) => {
@@ -69,11 +69,33 @@ module.exports = {
   },
   getAllUser: () => {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM users", (error, result) => {
+      connection.query('SELECT * FROM users', (error, result) => {
         if (!error) {
           resolve(result);
         } else {
           reject(error);
+        }
+      });
+    });
+  },
+  updateUserKey: (socket_id, id) => {
+    return new Promise((resolve, reject) => {
+      connection.query(`UPDATE users SET socket_id='${socket_id}' WHERE id='${id}'`, (err, result) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+  resetKey: (id) => {
+    return new Promise((resolve, reject) => {
+      connection.query(`UPDATE users SET userkey = null WHERE id='${id}'`, (err, result) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(result);
         }
       });
     });
