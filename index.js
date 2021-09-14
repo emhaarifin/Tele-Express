@@ -14,7 +14,7 @@ const jwt = require('jsonwebtoken');
 const createError = require('http-errors');
 const { insertMessage } = require('./src/models/messages');
 const { updateUser } = require('./src/models/users');
-const port = process.env.DB_PORT;
+const port = process.env.PORT;
 // use middle
 app.use(cors());
 app.use(morgan('dev'));
