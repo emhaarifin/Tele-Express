@@ -20,7 +20,11 @@ module.exports = {
     message
       .deleteMessage(sender_id, receiver_id)
       .then((result) => {
-        helper.response(res, 'success delete message', result, 200);
+        if (result.affectedRows) {
+          helper.response(res, 'success delete message', result, 200);
+        } else {
+          helper.response(res, 'No message deleted', result, 200);
+        }
       })
       .catch((err) => {
         console.log(err);
