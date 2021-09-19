@@ -29,7 +29,7 @@ module.exports = {
   deleteMessage: (sender_id, receiver_id) => {
     return new Promise((resolve, reject) => {
       connection.query(
-        `DELETE FROM messages where (receiver_id = '${receiver_id}' AND sender_id = '${sender_id}')`,
+        `DELETE FROM messages where (receiver_id = '${receiver_id}' AND sender_id = '${sender_id}') OR (receiver_id = '${sender_id}' AND sender_id = '${receiver_id}')`,
         (error, result) => {
           if (!error) {
             resolve(result);
