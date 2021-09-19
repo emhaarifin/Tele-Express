@@ -132,9 +132,12 @@ module.exports = {
       phone_number: req.body.phone_number,
       bio: req.body.bio,
     };
-
     if (req.file) {
-      data.avatar = `file/${req.file.filename}`;
+      data.avatar = req.file;
+      const uploader = async (path) => await cloudinary.uploads(path, 'Tele App');
+      const { path } = data.avatar;
+      const newPath = await uploader(path);
+      data.avatar = newPath.url;
     }
     users
       .updateUser(id, data)
