@@ -73,7 +73,7 @@ This is an example of how to list things you need to use the software and how to
     
 1. Clone the app type in terminal
 ```sh
-git clone https://github.com/emhaarifin/Tele-Express/.git
+https://github.com/emhaarifin/Tele-Express.git
 ```
 2. Open app's directory in CMD or Terminal
 ```sh
