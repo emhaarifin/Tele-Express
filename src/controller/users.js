@@ -7,6 +7,8 @@ const helper = require('../helper/response');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
+const cloudinary = require('../middleware/cloudinary');
+
 module.exports = {
   register: async (req, res) => {
     const { fullname, email, password, username, roles } = req.body;
