@@ -1,93 +1,317 @@
-CREATE DATABASE  IF NOT EXISTS `arifin_tele` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `arifin_tele`;
--- MySQL dump 10.13  Distrib 8.0.26, for macos11 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
 --
--- Host: fwebdev.xyz    Database: arifin_tele
--- ------------------------------------------------------
--- Server version	5.5.62-0ubuntu0.14.04.1
+-- Host: localhost
+-- Generation Time: Sep 11, 2021 at 07:18 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tele`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `messages`
 --
 
-DROP TABLE IF EXISTS `messages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender_id` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `receiver_id` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message_body` varchar(1280) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `sender_id` (`sender_id`),
-  KEY `receiver_id` (`receiver_id`),
-  CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `sender_id` varchar(128) NOT NULL,
+  `receiver_id` varchar(128) NOT NULL,
+  `message_body` varchar(1280) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-LOCK TABLES `messages` WRITE;
-/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,'6b26f4cb-0f83-4096-b371-c79b4408b858','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','','2021-09-01 00:28:54'),(2,'6b26f4cb-0f83-4096-b371-c79b4408b858','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','','2021-09-01 00:29:09'),(3,'6b26f4cb-0f83-4096-b371-c79b4408b858','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','','2021-09-01 00:33:11'),(4,'6b26f4cb-0f83-4096-b371-c79b4408b858','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','','2021-09-01 00:33:13'),(89,'2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','6b26f4cb-0f83-4096-b371-c79b4408b858','e','2021-09-01 04:39:25'),(213,'abef7421-3058-4b7f-aea7-7f73ef788106','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','asd','2021-09-19 14:12:41'),(214,'abef7421-3058-4b7f-aea7-7f73ef788106','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','akaka','2021-09-19 14:12:43'),(215,'abef7421-3058-4b7f-aea7-7f73ef788106','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','halo','2021-09-19 14:18:56'),(216,'2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','abef7421-3058-4b7f-aea7-7f73ef788106','gmn?','2021-09-19 14:20:38'),(219,'1dcb6809-fd4e-4219-8e38-fcd680f58247','abef7421-3058-4b7f-aea7-7f73ef788106','Halo, mas','2021-09-20 10:31:01'),(220,'1dcb6809-fd4e-4219-8e38-fcd680f58247','abef7421-3058-4b7f-aea7-7f73ef788106','lagi dimana?','2021-09-20 10:31:06'),(221,'abef7421-3058-4b7f-aea7-7f73ef788106','1dcb6809-fd4e-4219-8e38-fcd680f58247','lagi di warung ','2021-09-20 10:32:48'),(222,'abef7421-3058-4b7f-aea7-7f73ef788106','1dcb6809-fd4e-4219-8e38-fcd680f58247','nap?','2021-09-20 10:32:55'),(223,'abef7421-3058-4b7f-aea7-7f73ef788106','1dcb6809-fd4e-4219-8e38-fcd680f58247','*napa','2021-09-20 10:33:00'),(224,'1dcb6809-fd4e-4219-8e38-fcd680f58247','abef7421-3058-4b7f-aea7-7f73ef788106','nitip jajan','2021-09-20 10:33:11'),(225,'abef7421-3058-4b7f-aea7-7f73ef788106','1dcb6809-fd4e-4219-8e38-fcd680f58247','jajan apa?','2021-09-20 10:33:24'),(226,'1dcb6809-fd4e-4219-8e38-fcd680f58247','abef7421-3058-4b7f-aea7-7f73ef788106','putu ayu','2021-09-20 10:34:24'),(227,'abef7421-3058-4b7f-aea7-7f73ef788106','1dcb6809-fd4e-4219-8e38-fcd680f58247','yoi','2021-09-20 10:34:36'),(235,'1dcb6809-fd4e-4219-8e38-fcd680f58247','6b26f4cb-0f83-4096-b371-c79b4408b858','x','2021-09-22 07:06:24'),(239,'1dcb6809-fd4e-4219-8e38-fcd680f58247','2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','a','2021-09-22 07:13:40');
-/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `messages` (`id`, `sender_id`, `receiver_id`, `message_body`, `created_at`) VALUES
+(1, '6b26f4cb-0f83-4096-b371-c79b4408b858', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '', '2021-09-01 00:28:54'),
+(2, '6b26f4cb-0f83-4096-b371-c79b4408b858', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '', '2021-09-01 00:29:09'),
+(3, '6b26f4cb-0f83-4096-b371-c79b4408b858', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '', '2021-09-01 00:33:11'),
+(4, '6b26f4cb-0f83-4096-b371-c79b4408b858', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '', '2021-09-01 00:33:13'),
+(5, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asda', '2021-09-01 01:53:31'),
+(6, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asd', '2021-09-01 01:53:32'),
+(7, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'as', '2021-09-01 01:53:32'),
+(8, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 01:53:32'),
+(9, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1', '2021-09-01 01:53:32'),
+(10, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12', '2021-09-01 01:53:32'),
+(11, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123', '2021-09-01 01:53:32'),
+(12, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1231', '2021-09-01 01:53:32'),
+(13, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12312', '2021-09-01 01:53:32'),
+(14, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123123', '2021-09-01 01:53:32'),
+(15, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asda', '2021-09-01 01:53:32'),
+(16, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asd', '2021-09-01 01:53:32'),
+(17, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'as', '2021-09-01 01:53:32'),
+(18, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 01:53:32'),
+(19, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1', '2021-09-01 01:53:32'),
+(20, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12', '2021-09-01 01:53:32'),
+(21, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123', '2021-09-01 01:53:32'),
+(22, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1231', '2021-09-01 01:53:32'),
+(23, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12312', '2021-09-01 01:53:32'),
+(24, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123123', '2021-09-01 01:53:32'),
+(25, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asda', '2021-09-01 01:53:33'),
+(26, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asd', '2021-09-01 01:53:33'),
+(27, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'as', '2021-09-01 01:53:33'),
+(28, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 01:53:33'),
+(29, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1', '2021-09-01 01:53:33'),
+(30, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12', '2021-09-01 01:53:33'),
+(31, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123', '2021-09-01 01:53:33'),
+(32, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1231', '2021-09-01 01:53:33'),
+(33, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12312', '2021-09-01 01:53:33'),
+(34, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123123', '2021-09-01 01:53:33'),
+(35, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1', '2021-09-01 01:55:40'),
+(36, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12', '2021-09-01 01:55:40'),
+(37, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123', '2021-09-01 01:55:40'),
+(38, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1232', '2021-09-01 01:55:40'),
+(39, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1', '2021-09-01 01:56:02'),
+(40, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '12', '2021-09-01 01:56:02'),
+(41, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '123', '2021-09-01 01:56:02'),
+(42, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1232', '2021-09-01 01:56:02'),
+(43, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', '1232a', '2021-09-01 01:56:02'),
+(44, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 02:22:42'),
+(45, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'as', '2021-09-01 02:22:43'),
+(46, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'ase', '2021-09-01 02:22:43'),
+(47, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 02:41:42'),
+(48, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'as', '2021-09-01 02:41:43'),
+(49, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asd', '2021-09-01 02:41:43'),
+(50, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 02:43:21'),
+(51, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'as', '2021-09-01 02:43:21'),
+(52, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'asd', '2021-09-01 02:43:21'),
+(53, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'h', '2021-09-01 02:43:21'),
+(54, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ha', '2021-09-01 02:43:21'),
+(55, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'hal', '2021-09-01 02:43:21'),
+(56, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo', '2021-09-01 02:43:21'),
+(57, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'h', '2021-09-01 02:53:01'),
+(58, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ha', '2021-09-01 02:53:01'),
+(59, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'hal', '2021-09-01 02:53:01'),
+(60, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo', '2021-09-01 02:53:01'),
+(61, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo ', '2021-09-01 02:53:01'),
+(62, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo s', '2021-09-01 02:53:01'),
+(63, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo sa', '2021-09-01 02:53:01'),
+(64, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo sau', '2021-09-01 02:53:01'),
+(65, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo saud', '2021-09-01 02:53:01'),
+(66, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo sauda', '2021-09-01 02:53:01'),
+(67, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo saudar', '2021-09-01 02:53:01'),
+(68, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo saudara', '2021-09-01 02:53:01'),
+(69, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo', '2021-09-01 04:33:46'),
+(70, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ok', '2021-09-01 04:37:33'),
+(71, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'iya', '2021-09-01 04:37:39'),
+(72, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'baiklah saudaraku', '2021-09-01 04:37:44'),
+(73, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ha', '2021-09-01 04:37:46'),
+(74, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'yayaya', '2021-09-01 04:37:47'),
+(75, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'yaya', '2021-09-01 04:37:49'),
+(76, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:49'),
+(77, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:50'),
+(78, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:51'),
+(79, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:52'),
+(80, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:52'),
+(81, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:53'),
+(82, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:53'),
+(83, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:54'),
+(84, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:54'),
+(85, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:55'),
+(86, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ya', '2021-09-01 04:37:55'),
+(87, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ehe', '2021-09-01 04:38:26'),
+(88, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'ok', '2021-09-01 04:38:32'),
+(89, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'e', '2021-09-01 04:39:25'),
+(90, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'eh', '2021-09-01 04:40:34'),
+(91, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'yahaha', '2021-09-01 04:40:38'),
+(92, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'alo', '2021-09-01 04:40:56'),
+(93, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 04:41:40'),
+(94, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'as', '2021-09-01 16:22:07'),
+(95, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo saudaraku', '2021-09-01 16:29:57'),
+(96, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo', '2021-09-01 16:52:51'),
+(97, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'oke', '2021-09-01 16:52:58'),
+(98, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo', '2021-09-01 20:46:37'),
+(99, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'halo', '2021-09-01 21:14:30'),
+(100, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'pye', '2021-09-01 21:14:38'),
+(101, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'ndak papa', '2021-09-01 21:14:45'),
+(102, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'ok oklah', '2021-09-01 21:14:49'),
+(103, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'asiap', '2021-09-01 21:14:58'),
+(104, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'asd', '2021-09-01 21:15:01'),
+(105, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'd', '2021-09-01 21:15:02'),
+(106, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 's', '2021-09-01 21:15:03'),
+(107, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'sa', '2021-09-01 21:15:05'),
+(108, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'asd', '2021-09-01 21:16:53'),
+(109, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'ok', '2021-09-01 21:16:56'),
+(110, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'halo', '2021-09-01 21:17:08'),
+(111, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'gmn', '2021-09-01 21:17:13'),
+(112, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'apanya', '2021-09-01 21:17:18'),
+(113, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'ok oklah', '2021-09-01 21:17:41'),
+(114, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'ok oklah', '2021-09-01 21:17:47'),
+(115, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'siap bang', '2021-09-01 21:18:22'),
+(116, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'halo', '2021-09-01 21:18:42'),
+(117, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'halo', '2021-09-01 21:18:47'),
+(118, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'alo', '2021-09-01 21:19:32'),
+(119, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'aok', '2021-09-01 21:19:35'),
+(120, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'tes', '2021-09-01 21:19:55'),
+(121, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ok', '2021-09-01 21:20:14'),
+(122, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'oke', '2021-09-01 21:21:01'),
+(123, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'alo', '2021-09-01 21:21:42'),
+(124, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'pye', '2021-09-01 21:21:46'),
+(125, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'alo', '2021-09-01 21:21:59'),
+(126, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'siap bang', '2021-09-01 21:22:05'),
+(127, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'ahah', '2021-09-01 21:22:11'),
+(128, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:23:20'),
+(129, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:23:27'),
+(130, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:23:32'),
+(131, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:29:39'),
+(132, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'as', '2021-09-01 21:29:40'),
+(133, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'sd', '2021-09-01 21:29:42'),
+(134, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'alo', '2021-09-01 21:29:57'),
+(135, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'al', '2021-09-01 21:30:02'),
+(136, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'alo', '2021-09-01 21:31:31'),
+(137, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 21:32:18'),
+(138, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'sap', '2021-09-01 21:33:34'),
+(139, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'halo', '2021-09-01 21:33:49'),
+(140, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'alo', '2021-09-01 21:34:05'),
+(141, '6b26f4cb-0f83-4096-b371-c79b4408b858', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:35:35'),
+(142, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:35:56'),
+(143, '6b26f4cb-0f83-4096-b371-c79b4408b858', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:36:04'),
+(144, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'a', '2021-09-01 21:36:18'),
+(145, '6b26f4cb-0f83-4096-b371-c79b4408b858', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'a', '2021-09-01 21:36:25'),
+(146, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:38:42'),
+(147, '6b26f4cb-0f83-4096-b371-c79b4408b858', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:38:58'),
+(148, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:39:01'),
+(149, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:41:37'),
+(150, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:41:41'),
+(151, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'a', '2021-09-01 21:44:47'),
+(152, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 21:44:52'),
+(153, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'b', '2021-09-01 21:44:54'),
+(154, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'c', '2021-09-01 21:44:56'),
+(155, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'e', '2021-09-01 21:44:56'),
+(156, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'd', '2021-09-01 21:44:57'),
+(157, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 21:44:58'),
+(158, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'c', '2021-09-01 21:44:58'),
+(159, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'd', '2021-09-01 21:44:59'),
+(160, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 21:45:00'),
+(161, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 's', '2021-09-01 21:45:01'),
+(162, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:45:05'),
+(163, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:45:06'),
+(164, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'a', '2021-09-01 21:45:07'),
+(165, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'c', '2021-09-01 21:45:10'),
+(166, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'v', '2021-09-01 21:45:14'),
+(167, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'b', '2021-09-01 21:45:16'),
+(168, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'm', '2021-09-01 21:45:20'),
+(169, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'alo', '2021-09-01 21:46:20'),
+(170, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'gmn', '2021-09-01 21:46:26'),
+(171, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'abef7421-3058-4b7f-aea7-7f73ef788106', 'ngg papa', '2021-09-01 21:46:31'),
+(172, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'ok oklah', '2021-09-01 21:47:05'),
+(173, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo', '2021-09-01 21:52:35'),
+(174, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo', '2021-09-01 21:52:39'),
+(175, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ok', '2021-09-01 21:52:44'),
+(176, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'gmn', '2021-09-01 21:52:49'),
+(177, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:09:53'),
+(178, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'd', '2021-09-01 22:09:56'),
+(179, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'as', '2021-09-01 22:10:06'),
+(180, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:14:01'),
+(181, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:14:36'),
+(182, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:15:06'),
+(183, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:15:54'),
+(184, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:18:28'),
+(185, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:19:37'),
+(186, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 22:20:07'),
+(187, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'halo', '2021-09-01 23:05:13'),
+(188, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'halo', '2021-09-01 23:05:18'),
+(189, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'a', '2021-09-01 23:05:33'),
+(190, 'abef7421-3058-4b7f-aea7-7f73ef788106', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'b', '2021-09-01 23:05:36'),
+(191, 'abef7421-3058-4b7f-aea7-7f73ef788106', '6b26f4cb-0f83-4096-b371-c79b4408b858', 'haklo', '2021-09-01 23:57:12'),
+(192, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'halo', '2021-09-02 00:06:02'),
+(193, 'abef7421-3058-4b7f-aea7-7f73ef788106', '35482c10-48a9-444a-9b50-208afb3c39ed', 'ea', '2021-09-02 00:06:07'),
+(194, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '1dcb6809-fd4e-4219-8e38-fcd680f58247', 'Halo dimas', '2021-09-02 02:43:29'),
+(195, '1dcb6809-fd4e-4219-8e38-fcd680f58247', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'halo, ini siapa ya?', '2021-09-02 02:43:52'),
+(196, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '1dcb6809-fd4e-4219-8e38-fcd680f58247', 'saya hafidz', '2021-09-02 02:44:05'),
+(197, '1dcb6809-fd4e-4219-8e38-fcd680f58247', '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'salam kenal', '2021-09-02 02:47:35'),
+(198, '2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', '1dcb6809-fd4e-4219-8e38-fcd680f58247', 'Halo saudaraku', '2021-09-02 02:48:59'),
+(199, 'abef7421-3058-4b7f-aea7-7f73ef788106', '1dcb6809-fd4e-4219-8e38-fcd680f58247', 'halo', '2021-09-02 03:27:12'),
+(200, 'abef7421-3058-4b7f-aea7-7f73ef788106', '1dcb6809-fd4e-4219-8e38-fcd680f58247', 'siap', '2021-09-02 03:27:25');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fullname` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'https://res.cloudinary.com/emhaarifin/image/upload/v1632113374/Tele%20App/user-default_khw9y4.png',
-  `bio` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `roles` enum('admin','member') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'member',
-  `status` enum('inactive','active') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'inactive',
-  `socket_id` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `fullname` varchar(128) NOT NULL,
+  `username` varchar(12) NOT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `avatar` varchar(128) NOT NULL DEFAULT 'file/user-default.png',
+  `bio` varchar(120) DEFAULT NULL,
+  `roles` enum('admin','member') NOT NULL DEFAULT 'member',
+  `status` enum('inactive','active') NOT NULL DEFAULT 'inactive',
+  `socket_id` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('1dcb6809-fd4e-4219-8e38-fcd680f58247','101muhammadarifin@gmail.com','$2a$10$YbLvKXbjvXCOqdHlUbIstOWcmJOozR6viKWo4eXeLWqPHRVBCPxKa','Muhammad Arifin','Arifin','081917682610','https://res.cloudinary.com/emhaarifin/image/upload/v1632108760/Tele%20App/MVIMG_20210828_101543_4_yu76h9.jpg','Aku salah sangka pada diriku,','admin','active','GvIruGjDokiV2crOAAAD'),('2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18','emhaarifin02@gmail.com','$2a$10$wMkQiqsWwUGzoDoxf8lfw.UKcs4GOWv1kONkEGhKDdI4RP8XR94RO','Dimas Ari Saputra','Dimas','08823549849','https://res.cloudinary.com/emhaarifin/image/upload/v1632107991/Tele%20App/pp_3_lvf7ug.jpg','Bismillah sukses','member','active',''),('6b26f4cb-0f83-4096-b371-c79b4408b858','kawulaarifin@gmail.com','$2a$10$wuPTcgJv8EtvLndgzg0EYeQpGb3cQ1lEjZcaAz5rxpmPGwM0vwYWK','Ridho Maulana','Ridho','08121787356','https://res.cloudinary.com/emhaarifin/image/upload/v1632108226/Tele%20App/pp_2_vpmkic.jpg','Panggil Aku Pyeha, manse manse manmanse','member','active','bU_aHk5YUwGNzk_2AAAP'),('abef7421-3058-4b7f-aea7-7f73ef788106','armisja.404@gmail.com','$2a$10$WPllx6MGSAwJTo5e55KCPuvc0lICn/G85eMBzPVvnE92jKpyt0OHC','Alan Nugraha','Alan','08581666358','https://res.cloudinary.com/emhaarifin/image/upload/v1632108227/Tele%20App/pp_uo6vsy.jpg','Hubungi jika penting','admin','active','');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `users` (`id`, `email`, `password`, `fullname`, `username`, `phone_number`, `avatar`, `bio`, `roles`, `status`, `socket_id`) VALUES
+('1dcb6809-fd4e-4219-8e38-fcd680f58247', '101muhammadarifin@gmail.com', '$2a$10$YbLvKXbjvXCOqdHlUbIstOWcmJOozR6viKWo4eXeLWqPHRVBCPxKa', 'Dimas', 'Dimas2', 81544547, 'file/user-default.png', 'Halo saudaraku', 'member', 'inactive', 'xr83yI4xfNrUWj6wAAAG'),
+('2cf8dc6f-6dc5-44f7-a899-9c6fe69acf18', 'emhaarifin02@gmail.com', '$2a$10$wMkQiqsWwUGzoDoxf8lfw.UKcs4GOWv1kONkEGhKDdI4RP8XR94RO', 'ar', 'Suria2000mau', NULL, 'file/user-default.png', NULL, 'member', 'inactive', 'ATXFU7mNPOVQpPkLAAAH'),
+('35482c10-48a9-444a-9b50-208afb3c39ed', '', '$2a$10$pStLYB7b7S83QIJPDS3Q7eW7sU9IZBHmxthxfY3XMmIiiu9PcWy8.', '', '', NULL, 'file/user-default.png', NULL, 'member', 'inactive', ''),
+('6b26f4cb-0f83-4096-b371-c79b4408b858', 'kawulaarifin@gmail.com', '$2a$10$wuPTcgJv8EtvLndgzg0EYeQpGb3cQ1lEjZcaAz5rxpmPGwM0vwYWK', 'Arifin', 'arifiin', NULL, 'file/user-default.png', NULL, 'member', 'inactive', 'bU_aHk5YUwGNzk_2AAAP'),
+('abef7421-3058-4b7f-aea7-7f73ef788106', 'armisja.404@gmail.com', '$2a$10$WPllx6MGSAwJTo5e55KCPuvc0lICn/G85eMBzPVvnE92jKpyt0OHC', 'Dimas', 'Kaji', 81532445, 'file/1630268435615-ScreenShot2021-06-29at00.21.22.png', 'Aku anak ganteng 2', 'admin', 'active', '');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sender_id` (`sender_id`),
+  ADD KEY `receiver_id` (`receiver_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-09-23 11:16:17
