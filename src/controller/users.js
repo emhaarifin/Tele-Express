@@ -167,8 +167,9 @@ module.exports = {
     });
   },
   getFriend: (req, res) => {
+    const search = req.query.search || '';
     users
-      .getAllUser()
+      .getAllUser(search)
       .then((result) => {
         const friends = result.filter((item) => {
           if (item.id != req.userId) {
