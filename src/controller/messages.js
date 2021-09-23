@@ -1,5 +1,5 @@
-const message = require("../models/messages");
-const helper = require("../helper/response");
+const message = require('../models/messages');
+const helper = require('../helper/response');
 
 module.exports = {
   getMessageById: (req, res) => {
@@ -8,7 +8,23 @@ module.exports = {
     message
       .getMessageById(sender_id, receiver_id)
       .then((result) => {
-        helper.response(res, "success get message", result, 200);
+        helper.response(res, 'success get message', result, 200);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  deleteMessage: (req, res) => {
+    const receiver_id = req.params.receiver_id;
+    const sender_id = req.userId;
+    message
+      .deleteMessage(sender_id, receiver_id)
+      .then((result) => {
+        if (result.affectedRows) {
+          helper.response(res, 'success delete message', result, 200);
+        } else {
+          helper.response(res, 'No message deleted', result, 200);
+        }
       })
       .catch((err) => {
         console.log(err);

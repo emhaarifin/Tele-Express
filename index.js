@@ -10,13 +10,17 @@ const app = express();
 const httpServer = http.createServer(app);
 const route = require('./src/route/index');
 const jwt = require('jsonwebtoken');
-
 const createError = require('http-errors');
 const { insertMessage } = require('./src/models/messages');
 const { updateUser } = require('./src/models/users');
-const port = process.env.DB_PORT;
+const port = process.env.PORT;
 // use middle
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+  })
+);
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,7 +30,7 @@ app.use('/file', express.static('./uploads'));
 // config socket
 const io = socket(httpServer, {
   cors: {
-    origin: '*',
+    origin: true,
   },
 });
 
