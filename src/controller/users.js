@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs');
 const helper = require('../helper/response');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-
 const cloudinary = require('../middleware/cloudinary');
 
 module.exports = {
@@ -171,7 +170,7 @@ module.exports = {
       }
     });
   },
-  getFriend: (req, res) => {
+  getFriend: async (req, res) => {
     users
       .getAllUser()
       .then((result) => {

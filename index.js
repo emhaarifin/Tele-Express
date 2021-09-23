@@ -10,7 +10,6 @@ const app = express();
 const httpServer = http.createServer(app);
 const route = require('./src/route/index');
 const jwt = require('jsonwebtoken');
-
 const createError = require('http-errors');
 const { insertMessage } = require('./src/models/messages');
 const { updateUser } = require('./src/models/users');
@@ -21,6 +20,7 @@ app.use(
     origin: true,
   })
 );
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
