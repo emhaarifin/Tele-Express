@@ -69,7 +69,7 @@ module.exports = {
   },
   getAllUser: (search) => {
     return new Promise((resolve, reject) => {
-      connection.query(`SELECT * FROM users WHERE users.fullname LIKE CONCAT('%',${search},'%')`, (error, result) => {
+      connection.query(`SELECT * FROM users WHERE users.fullname LIKE CONCAT('%',"${search}",'%')`, (error, result) => {
         if (!error) {
           resolve(result);
         } else {
@@ -101,5 +101,3 @@ module.exports = {
     });
   },
 };
-
-const 
